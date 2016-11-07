@@ -1,0 +1,5 @@
+<h2>추천 받기</h2>
+<% @re.each do |r| %>
+    <h4><%= r.user.username %> 비교 값</h4>
+    <h5><%= r.compare %> 점</h5>
+<% end %>

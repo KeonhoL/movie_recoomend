@@ -1,0 +1,58 @@
+
+<p><%= flash[:alert] %></p>
+
+<div class="container">
+    <h2>영화 추가하기</h2>
+    <br>
+    <form action="/movie/write_complete" method="post">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>영화 제목</label>
+                    <input type="text" name="title" placeholder="제목" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group" id="password_type">
+                <label>카테고리</label>
+                <select class="form-control" name="category">
+                    <% @c.each do |s| %>
+                        <option value="<%= s.id %>"><%= s.movie_category %></option>
+                    <% end %>
+                </select>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group" id="password_type">
+                <label>영화감독</label>
+                <input type="text" name="director" placeholder="감독" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>주연</label>
+                <input type="text" name="actor" placeholder="주연" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6">
+                <label>이미지 주소</label>
+                <input type="text" name="img_url" placeholder="image_url" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>평점</label>
+                <input type="text" name="score" placeholder="평점" class="form-control">
+            </div>
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">영화 작성</button>
+    </form>
+</div>

@@ -1,0 +1,74 @@
+<div class="row" style="">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @user.username %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3 col-lg-3 " align="left"> <img alt="User Pic" src="https://image.freepik.com/free-icon/male-profile-user-shadow_318-40244.jpg" class="img-circle img-responsive"> </div>
+            <div class=" col-md-9 col-lg-9 "> 
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                    <td>Username:</td>
+                    <td><%= @user.username %></td>
+                  </tr>
+                  <tr>
+                    <td>나이</td>
+                    <td><%= @user.age %></td>
+                  </tr>
+                  <tr>
+                    <td>성별</td>
+                    <td><%= @user.gender.sex %></td>
+                  </tr>
+                  <tr>
+                    <td>선호 장르</td>
+                    <td><%= @user.category.movie_category %></td>
+                  </tr>
+                  <tr>
+                    <td>지역</td>
+                    <td><%= @user.location.name %></td>
+                  </tr>
+                  <tr>
+                    <td>선호 계절</td>
+                    <td><%= @user.weather.name %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" id="tourpackages-carousel">
+  <div class="row">
+    <div class="col-md-12">
+    <h4>My Like Movie</h4>
+        <div class="table-responsive">
+          <table id="mytable" class="table table-bordred table-striped">
+            <thead>
+              <th>영화 제목</th>
+              <th>감독</th>
+              <th>평점</th>
+              <th>Show</th>
+              <th>Delete</th>
+            </thead>
+            <tbody>
+              <% @user.movies.each do |m| %>
+              <tr>
+                <td><%= m.title %></td>
+                <td><%= m.director %></td>
+                <td><%= m.score %></td>
+                <td><button onclick="location.href='/movie/show/<%= m.id %>'" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-log-in"></span></button></td>
+                <td><button onclick="location.href='/movie/liked_delete_complete/<%= m.id %>'" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>

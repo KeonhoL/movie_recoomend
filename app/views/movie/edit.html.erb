@@ -1,0 +1,54 @@
+    <h2>영화 수정하기</h2>
+    <br>
+    <form action="/movie/edit_complete" method="post">
+        <input type="hidden" name="id" value="<%= @movie.id %>">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>영화 제목</label>
+                    <input type="text" name="title" placeholder="제목" class="form-control" value="<%= @movie.title %>">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group" id="password_type">
+                <label>카테고리</label>
+                <select class="form-control" name="category" value="<%= @movie.category.movie_category %>">
+                    <% @c.each do |s| %>
+                        <option value="<%= s.id %>"><%= s.movie_category %></option>
+                    <% end %>
+                </select>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group" id="password_type">
+                <label>영화감독</label>
+                <input type="text" name="director" placeholder="감독" class="form-control" value="<%= @movie.director %>">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>주연</label>
+                <input type="text" name="actor" placeholder="주연" class="form-control" value="<%= @movie.actor_one %>">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6">
+                <label>이미지 주소</label>
+                <input type="text" name="img_url" placeholder="image_url" class="form-control" value="<%= @movie.img_url %>">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>평점</label>
+                <input type="text" name="score" placeholder="평점" class="form-control" value="<%= @movie.score %>">
+            </div>
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">영화 수정 완료</button>
+    </form>
