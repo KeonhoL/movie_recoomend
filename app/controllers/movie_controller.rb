@@ -41,7 +41,7 @@ class MovieController < ApplicationController
     user = User.where(id: session[:user_id])[0]
     like = Movieliked.where("movie_id = #{movie.id}", "user_id=#{user.id}")
     like.first.destroy
-    flash[:alert] = "댓글이 삭제되었습니다."
+    flash[:alert] = "영화가 삭제 되었습니다."
     redirect_to "/user/mypage/#{user.id}"
   end
   

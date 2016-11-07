@@ -32,7 +32,8 @@
                 </li>
                 <li>|</li>
                 <li>
-                    <% if @like.first.nil? %>
+                    
+                    <% if @like.blank? %>
                         <button onclick="location.href='/movie/liked_complete/<%= @movie.id %>'" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up"></span>좋아요</button>
                     <% else %>
                         <button id="liked" onclick="location.href='/movie/liked_complete/<%= @movie.id %>'" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up"></span>좋아요</button>
