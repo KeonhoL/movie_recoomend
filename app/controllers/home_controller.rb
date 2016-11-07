@@ -4,5 +4,8 @@ class HomeController < ApplicationController
       @u = User.find(session[:user_id])
     else
     end
+    @posts = Bulletin.second.posts
+    @movie = Movie.all.sample(3)
+    @best_movie = Movie.first
   end
 end

@@ -5,9 +5,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string  :password
       t.integer :age
       t.integer :gender_id
+      t.integer :job_id
+      t.integer :emotion_id
       t.integer :category_id
-      t.integer :location_id
-      t.integer :weather_id
     
       t.timestamps null: false
     end

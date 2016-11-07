@@ -1,2 +1,19 @@
 <h2>추천 받기</h2>
-<h4><%= @movie_count %>개 영화 데이터</h4>
+<hr>
+<h4><%= @movie_count %>개 영화 데이터 | <%= @user_count %>의 사용자</h4>
+<p class="well"> 추천을 받으시겠습니까? 감정을 선택해주세요. </p>
+<form action="/recommendation/action" method="get">
+    <div>
+        <label>감정</label>    
+        <select class="form-control" name="emotion">
+            <% @emo.each do |c| %>
+                <option value='<%= c.id %>'><%= c.name %></option>
+            <% end %>
+        </select>
+    </div>    
+    <br>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-info btn-lg btn-block">추천받기</button>
+    </div>
+</form>

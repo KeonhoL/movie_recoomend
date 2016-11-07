@@ -4,63 +4,52 @@
         <div id="custom-search-input">
             <form action="list" method="GET">
                 <div class="input-group col-md-12">
-                    <input name="movie" type="text" class="search-query form-control" placeholder="Search" />
+                    <input name="movie" type="text" class="search-query form-control" placeholder="제목을 입력해주세요" />
                     <span class="input-group-btn">
-                        <button type="submit" class="btn btn-danger" type="button" >
+                        <button type="submit" class="btn btn-primary" type="button" >
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
                 </div>
             </form>
-            <% if !@m.nil? %>
-                
-            <% end %>
         </div>
 </div>
 <br><br>
-<div class="row">
-	<div class="well">
-        <div class="list-group">
-            <% if !@m.nil? %>
-                <% @m.each do |s| %>
-                    <a href="#" class="list-group-item">
-                        <div class="media col-md-3">
-                            <% if s.img_url == nil? %>
-                                <figure class="poll">
-                                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250" >
-                                </figure>
-                            <% else %>
-                                <figure class="pull-left">
-                                    <img class="media-object img-rounded img-responsive" src="<%= s.img_url %>" alt="placehold.it/350x250" >
-                                </figure>
-                            <% end %>
-                        </div>
-                        <div class="col-md-6">
-                            <h4 class="list-group-item-heading"><%= s.title %></h4>
-                            <p class="list-group-item-text">
-                                영화 설명
-                            </p>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <br><br><br>
-                            <h2 class="hidden"> <%= s.director %> <small> 감독 </small></h2>
-                            <form action="/movie/show/<%= s.id %>" method="get">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">자세히 보기</button>
-                            </form>
-                            <div class="stars">
-                                <% 0.upto((s.score / 2).to_i) do |c| %>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <% @s = c %>
-                                <% end %>
-                                <% 1.upto(5-(@s+1)) do |c| %>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                <% end %>
-                            </div>
-                            <p> 평점 <%= s.score %> <small> / </small> 10 </p>
-                        </div>
+<hr>
+
+    <% if !@m.nil? %>
+        <% @m.each do |s| %>
+        <!-- Blog Post Row -->
+            <div class="row">
+                <div class="col-md-1 text-center">
+                    <p><i class="fa fa-film fa-4x"></i>
+                    </p>
+                    <p></p>
+                </div>
+                <div class="col-md-5">
+                    <a href="/movie/show/<%= s.id %>">
+                        <% if s.img_url.size < 1 %>
+                            <img class="img-responsive img-hover" src="https://pl-movie-recommend-keonhol.c9users.io/noimage.jpg" alt="">
+                            <p><%= s.img_url %></p>
+                        <% else %>
+                            <img class="img-responsive img-hover" src="<%= s.img_url %>" alt="">
+                        <% end %>
                     </a>
-                <% end %>
-            <% end %>
-        </div>
-    </div>
-</div>
+                </div>
+                <div class="col-md-6">
+                    <h3><a href="/movie/show/<%= s.id %>"><%= s.title %></a>
+                    </h3>
+                    <p>by <a href="#"><%= s.director %></a>
+                    </p>
+                    <p><%= s.actor_one %> 주연 </p>
+                    <a class="btn btn-primary" href="/movie/show/<%= s.id %>">자세히 보기<i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <hr>
+        <!-- /.row -->
+        <% end %>
+
+        <hr>
+    <% end %>
+        
+        

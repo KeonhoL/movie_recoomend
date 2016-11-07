@@ -111,49 +111,50 @@ class MovieController < ApplicationController
   end
   
   def get_movie
-      90100.downto(90000) do |c|
-      doc = Nokogiri::HTML(open("http://movie.daum.net/moviedb/main?movieId=#{c}")) 
-      m = Movie.new
-      doc.css(".subject_movie//.tit_movie").each do |x|
-        m.title = x.inner_text
-      end
-      @a = doc.css("dl//dd").first.inner_text.split("/")
-      @b = ["드라마","액션", "스릴러", "공포", "범죄", "판타지", "전쟁", "애니메이션", "코미디", "멜로", "미스터리", "SF", "사극", "다큐멘터리", "뮤지컬", "성인물", "기타"]
-      @a.each do |a|
-        @b.each do |b|
-          if a == b # 2중 반복문 카 테고 리 검사
-            a = b
-          else
-            a = Category.last.movie_category
+    90175.upto(90200) do |c|
+        doc = Nokogiri::HTML(open("http://movie.daum.net/moviedb/main?movieId=#{c}")) 
+        m = Movie.new
+        doc.css(".subject_movie//.tit_movie").each do |x|
+          m.title = x.inner_text
+        end
+        @a = doc.css("dl//dd").first.inner_text.split("/")
+        @b = ["드라마","액션", "스릴러", "공포", "범죄", "판타지", "전쟁", "애니메이션", "코미디", "멜로", "미스터리", "SF", "사극", "다큐멘터리", "뮤지컬", "성인물", "기타"]
+        @a.each do |a|
+          @b.each do |b|
+            if a == b # 2중 반복문 카 테고 리 검사
+              a = b
+            else
+              a = Category.last.movie_category
+            end
           end
         end
-      end
- 
-      m.category = Category.find_by_movie_category(@a.first)
-      
-      if !m.category
-        m.category =  Category.last
-      end
-      if doc.css("dl//dd//a")[0].nil?
-      else
-        m.director = doc.css("dl//dd//a")[0].inner_text
-      end
-      if doc.css("dl//dd//a")[1].nil?
-      else
-        m.actor_one = doc.css("dl//dd//a")[1].inner_text
-      end
-      if doc.css("dl//dd//a")[2].nil?
-      else
-        m.actor_two = doc.css("dl//dd//a")[2].inner_text
-      end
-      if doc.css("dl//dd//a")[3].nil?
-      else
-        m.actor_three = doc.css("dl//dd//a")[3].inner_text
-      end
-      m.img_url = doc.at_xpath('//*[@class="area_poster thumb_noimage bg_noimage"]//img/@src').to_s
-      m.score = doc.css(".emph_grade").first.inner_text
-      m.save
+   
+        m.category = Category.find_by_movie_category(@a.first)
+        
+        if !m.category
+          m.category =  Category.last
+        end
+        if doc.css("dl//dd//a")[0].nil?
+        else
+          m.director = doc.css("dl//dd//a")[0].inner_text
+        end
+        if doc.css("dl//dd//a")[1].nil?
+        else
+          m.actor_one = doc.css("dl//dd//a")[1].inner_text
+        end
+        if doc.css("dl//dd//a")[2].nil?
+        else
+          m.actor_two = doc.css("dl//dd//a")[2].inner_text
+        end
+        if doc.css("dl//dd//a")[3].nil?
+        else
+          m.actor_three = doc.css("dl//dd//a")[3].inner_text
+        end
+        m.img_url = doc.at_xpath('//*[@class="area_poster thumb_noimage bg_noimage"]//img/@src').to_s
+        m.score = doc.css(".emph_grade").first.inner_text
+        m.save
     end
+    return nil
   end
   
   def delete_movie

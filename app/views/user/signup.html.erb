@@ -1,73 +1,44 @@
 
-<div class="container">
-    <h2>회원가입</h2> 
-    <br>
-    <p><%= flash[:alert] %></p>
-    <form action="/user/signup_complete" method="post">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label>이메일</label>
-                    <input type="email" name="username" placeholder="이메일" class="form-control">
-                </div>
+<article class="container">
+    <div class="page-header">
+        <h1>회원 가입</h1>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <form role="form" method="post" action="/user/signup_complete">
+            <div class="form-group">
+                <label for="InputId">아이디</label>
+                <input name="username" type="id" class="form-control" id="InputId" placeholder="아이디 입력">
             </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="form-group" id="password_type">
-                <label>비밀번호</label>
-                <input type="password" name="password" class="form-control">
+            <div class="form-group">
+                <label for="InputPassword1">비밀번호</label>
+                <input name="password" type="password" class="form-control" id="InputPassword1" placeholder="비밀번호 입력">
             </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group" id="password_type">
-                <label>비밀번호 확인</label>
-                <input type="password" name="retype_password" class="form-control">
+            <div class="form-group">
+                <label for="InputPassword2">비밀번호 확인</label>
+                <input name="retype_password" type="password" class="form-control" id="InputPassword2" placeholder="비밀번호 확인">
             </div>
-          </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <label>나이</label>
-                <input type="number" class="form-control" name="age" min="0" max="100" title="Format: 3 digits">
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-3">
-                <label>성별</label>
+            <div class="form-group">
+                <label for="userage">나이</label>
+                <input name="age" type="number" class="form-control" name="age" min="0" max="100" title="Format: 3 digits">
+    	    </div>   
+    
+     	    <div class="form-group">
+                <label for="usersex">성별</label>
                 <select class="form-control" name="gender">
                     <% @sex.each do |s| %>
                         <option value="<%= s.id %>"><%= s.sex %></option>
                     <% end %>
-                </select>
+                </select>  
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-3">
-                <label>지역</label>
-                <select class="form-control" name="location">
-                    <% @location.each do |s| %>
+     	    <div class="form-group">
+                <label for="userjob">직업</label>
+    		    <select class="form-control" name="job">
+                    <% @job.each do |s| %>
                         <option value="<%= s.id %>"><%= s.name %></option>
                     <% end %>
                 </select>
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-3">
-                <label>계절</label>
-                <select class="form-control" name="weather">
-                    <% @weather.each do |s| %>
-                        <option value="<%= s.id %>"><%= s.name %></option>
-                    <% end %>
-                </select>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-3">
+            <div class="form-group">
                 <label>선호 장르</label>
                 <select class="form-control" name="category">
                     <% @cate.each do |c| %>
@@ -75,8 +46,22 @@
                     <% end %>
                 </select>
             </div>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">회원 가입</button>
-    </form>
-</div>
+            
+            <div>
+                <label>감정</label>    
+                <select class="form-control" name="emotion">
+                    <% @emo.each do |c| %>
+                        <option value='<%= c.id %>'><%= c.name %></option>
+                    <% end %>
+                </select>
+            </div>    
+                
+            <br>
+            <br>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-info">회원가입<i class="fa fa-check spaceLeft"></i></button>
+            </div>
+            <p><%= flash[:alert] %></p>
+        </form>
+    </div>
+</article>

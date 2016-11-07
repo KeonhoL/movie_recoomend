@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     belongs_to  :gender
-    belongs_to  :location
-    belongs_to  :weather
+    belongs_to  :job
+    belongs_to  :emotion
     belongs_to  :category
     has_many    :reviews
     has_many    :posts

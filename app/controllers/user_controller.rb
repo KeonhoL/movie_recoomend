@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   def signup
-    @location = Location.all
-    @weather = Weather.all
+    @job = Job.all
+    @emo = Emotion.all
     @sex  = Gender.all
     @cate = Category.all
   end
@@ -16,13 +16,13 @@ class UserController < ApplicationController
     u.age         = params[:age]
     u.gender_id   = params[:gender]
     u.category_id = params[:category]
-    u.location_id = params[:location]
-    u.weather_id = params[:weather]
+    u.job_id = params[:job]
+    u.emotion_id = params[:emotion]
     if params[:password] == params[:retype_password]
       u.password = params[:password]
       if u.save
         flash[:alert] = "성공적으로 가입되었습니다."
-        redirect_to "/home/index"
+        redirect_to "/user/login"
       else
         flash[:alert] = u.errors.values.flatten.join(' ')
         redirect_to :back
@@ -34,6 +34,7 @@ class UserController < ApplicationController
   end
   
   def login
+    
   end
 
   def login_complete
@@ -54,6 +55,7 @@ class UserController < ApplicationController
   def logout_complete
     reset_session
     flash[:alert] = "성공적으로 로그아웃하였습니다."
-    redirect_to "/home/index"
+    redirect_to "/user/login"
   end
 end
+

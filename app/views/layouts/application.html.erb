@@ -19,8 +19,10 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
@@ -30,6 +32,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .navbar-inverse {
+            background-color: #FFFFFF;
+            border-color: #E7E7E7;
+        }
+    </style>
     
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -39,8 +48,7 @@
 </head>
 <body>
     
-  <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -50,34 +58,41 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/home/index">MO.RE</a>
+                <a class="navbar-brand" href="/home/index">PL - 영화추천시스템</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://movie-recommend-1-keonhol.c9users.io">About</a>
+                        <a href="https://pl-movie-recommend-keonhol.c9users.io/">About</a>
                     </li>
                     <li>
-                        <a href="/movie/list">Movie</a>
+                        <a href="/movie/list">영화 검색</a>
                     </li>
                     <li>
-                        <a href="/recommendation/index">Recommendation</a>
+                        <a href="/recommendation/index">영화 추천</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Board<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">게시판<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li class="<%= params[:bulletin_id] == '1' ? 'active' : '' %>"><%= link_to 'Notice', bulletin_posts_path('1') %></li>
-                            <li class="<%= params[:bulletin_id] == '2' ? 'active' : '' %>"><%= link_to 'Free Board', bulletin_posts_path('2') %></li>
-                            <li class="<%= params[:bulletin_id] == '3' ? 'active' : '' %>"><%= link_to 'Q&A', bulletin_posts_path('3') %></li>
+                            <li>
+                                <a href="https://pl-movie-recommend-keonhol.c9users.io/bulletins/1/posts">공지사항</a>
+                            </li>
+                            <li>
+                                <a href="https://pl-movie-recommend-keonhol.c9users.io/bulletins/2/posts">자유게시판</a>
+                            </li>
+                            <li>
+                                <a href="https://pl-movie-recommend-keonhol.c9users.io/bulletins/3/posts">질문과 답변</a>
+                            </li>
                         </ul>
                     </li>
-                    <% if !session[:user_id].nil? %>
+                    <% if session[:user_id].nil? %>
                         <li>
-                            <a href="/user/mypage/<%= session[:user_id] %>">
-                                <span class="glyphicon glyphicon-user"></span>
-                                <strong>MyInfo</strong>
-                            </a>
+                            <a href="/user/login">로그인</a>
+                        </li>
+                    <% else %>
+                        <li>
+                            <a href="/user/logout_complete">로그아웃</a>
                         </li>
                     <% end %>
                 </ul>
@@ -86,12 +101,10 @@
         </div>
         <!-- /.container -->
     </nav>
+
+    <!-- Header Carousel -->
   <div class="container">
-      
-      
-      
       <%= yield %>
   </div>
-
 </body>
 </html>

@@ -1,11 +1,17 @@
 class RecommendationController < ApplicationController 
     def index
         @movie_count = Movie.count
+        @user_count = User.count
+        @emo = Emotion.all
     end
     
     def action  
+        Recommend.destroy_all
         u = User.all
         mine = User.find(session[:user_id])
+        mine.emotion_id = params[:emotion]
+        mine.save
+        
         u.delete(mine[0])
         
         age2 = mine.age
@@ -37,13 +43,13 @@ class RecommendationController < ApplicationController
                 categorypoint = 0
             end
             
-            if user.location == mine.location
+            if user.job == mine.job
                 locationpoint = 1
             else
                 locationpoint = 0
             end
             
-            if user.weather == mine.weather
+            if user.emotion == mine.emotion
                 weatherpoint = 1
             else
                 weatherpoint = 0
@@ -56,6 +62,6 @@ class RecommendationController < ApplicationController
             r.save
         end
         
-        @re = Recommend.all
+        @re = Recommend.all.sort_by(&:compare).reverse.first(3)
     end
 end

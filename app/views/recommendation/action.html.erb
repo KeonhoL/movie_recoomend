@@ -1,5 +1,16 @@
 <h2>추천 받기</h2>
-<% @re.each do |r| %>
-    <h4><%= r.user.username %> 비교 값</h4>
-    <h5><%= r.compare %> 점</h5>
-<% end %>
+
+<div class='row'>
+  <% @re.each do |r| %>
+      <div class='col-sm-4'>
+        <div class="panel panel-default">
+          <img src="<%= r.user.movielikeds.first.movie.img_url %>" class="img-responsive">
+          <div class="panel-body">
+            <p class='lead'><a href="/movie/show/<%= r.user.movielikeds.first.movie.id %>"><%= r.user.movielikeds.first.movie.title %></a></p>
+            <p><samll><%= r.user.username %> 사용자 추천</samll></p>
+            <p><%= r.user.movielikeds.first.movie.reviews.count %> Reviews</p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
